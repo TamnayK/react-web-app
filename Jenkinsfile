@@ -50,7 +50,7 @@ pipeline
      gsutil defacl set public-read gs://tanmay-kachariya
      gsutil web set -m index.html -e index.html gs://tanmay-kachariya
      
-     gsutil cp -r * gs://vijay-patil
+     gsutil cp -r * gs://tanmay-kachariya
      gsutil setmeta -h "content-type: image/svg+xml" gs://tanmay-kachariya/static/media/*.svg
      
       '''
