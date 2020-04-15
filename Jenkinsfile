@@ -22,6 +22,8 @@ agent any
         npm install
         npm run build
         ls -ltr
+        tar -cvf frontend-${BUILD_NUMBER}.tar *
+        ls -ltr
         '''
         }
         
