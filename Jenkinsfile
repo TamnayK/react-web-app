@@ -27,8 +27,6 @@
                          ls -ltr
                          cd build/
                          tar -cvf frontend-${BUILD_NUMBER}.tar *
-                         cp frontend-${BUILD_NUMBER}.tar ${WORKSPACE}/
-                         ls -ltr
                          '''
                        }   
                         }
@@ -39,12 +37,15 @@
                         {
 
                             sh '''
-                           rm -rf deploy
-                           mkdir deploy
-                           cp -r tar frontend-${BUILD_NUMBER}.tar deploy/
-                           cd deploy
-                           tar -xvf frontend-${BUILD_NUMBER}.tar                            
-                            ls -ltr                            
+                            cd build
+                            tar -xvf frontend-${BUILD_NUMBER}.tar
+                            rm -rf frontend-${BUILD_NUMBER}.tar
+                            ls -ltr
+                            gsutil acl ch -u AllUsers:R gs://tanmay-kachariya
+                            gsutil defacl set public-read gs://tanmay-kachariya
+                            gsutil web set -m index.html -e index.html gs://tanmay-kachariya
+                            gsutil cp -r * gs://tanmay-kachariya/
+                            gsutil setmeta -h "content-type: image/svg+xml" gs://tanmay-kachariya/static/media/*.svg
                             '''
                          
                         }
